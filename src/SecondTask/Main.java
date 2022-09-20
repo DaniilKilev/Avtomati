@@ -77,7 +77,7 @@ public class Main {
         }
     }
     public static void changeTerminal(int pos, String changeTo) {
-        outLine = outLine.substring(0, pos) + changeTo + outLine.substring(pos + 1);// Возвращаем подстроку s, которая начиная с нулевой позиции переданной строки (0) и заканчивается позицией символа (pos), который мы хотим удалить, соединенную с другой подстрокой s, которая начинается со следующей позиции после позиции символа (pos + 1), который мы удаляем, и заканчивается последней позицией переданной строки.
+        outLine = outLine.substring(0, pos) + changeTo + outLine.substring(pos + 1);
     }
     public static List<Integer> getRules(){
         Scanner scanner = new Scanner(System.in);

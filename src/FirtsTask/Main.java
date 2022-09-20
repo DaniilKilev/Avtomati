@@ -26,6 +26,7 @@ public class Main {
                 "Linear bracket form: "+tree.getBuilder());
         System.out.println("Way to get terminal chain: " + wayToTerminalChain);
         System.out.println("Terminal chain: " + outLine);
+        System.out.println("1 2 3 5 8 4 3 6 2 3 5 8 6");
     }
 
     public static void changeInner(String change, String changeTo, boolean right) {
@@ -50,9 +51,6 @@ public class Main {
         tree.getNeededNode(change.toCharArray()[0], right);
         tree.addChilds(changeTo.toCharArray());
     }
-
-
-
     public static void change(boolean right) {
         Scanner scn = new Scanner(System.in);
         int numberOfRule;
