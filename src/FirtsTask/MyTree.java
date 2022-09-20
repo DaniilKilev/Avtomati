@@ -33,11 +33,12 @@ public class MyTree {
             currentNode.childs.add(new MyTree(val));
         }
     }
-    public void getNeededNode(char value){
+    public void getNeededNode(char value, boolean right){
         if(currentNode.childs.isEmpty()){
             return;
         }
-        //Collections.reverse(currentNode.childs);
+        if(right)
+            Collections.reverse(currentNode.childs);
         for(MyTree node: currentNode.childs){
             if(!node.isChecked){
                 if (node.getValue() == value){
@@ -48,9 +49,10 @@ public class MyTree {
                 }
             }
         }
-        //Collections.reverse(currentNode.childs);
+        if(right)
+            Collections.reverse(currentNode.childs);
         currentNode = currentNode.parentNode;
-        getNeededNode(value);
+        getNeededNode(value, right);
     }
     public void setParentNode(MyTree parentNode){
         this.parentNode = parentNode;
