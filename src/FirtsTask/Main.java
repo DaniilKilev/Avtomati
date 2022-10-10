@@ -23,18 +23,26 @@ public class Main {
         change(true);
         MyTree.printTree(tree.getHeadNode());
         System.out.println("\n" +
-                "Linear bracket form: "+tree.getBuilder());
+                "Linear bracket form: " + tree.getBuilder());
         System.out.println("Way to get terminal chain: " + wayToTerminalChain);
         System.out.println("Terminal chain: " + outLine);
-        System.out.println("1 2 3 5 8 4 3 6 2 3 5 8 6");
     }
 
     public static void changeInner(String change, String changeTo, boolean right) {
         int posOfNotTerminal;
-        if(!right)
+        int aPos = !outLine.contains("A") ? outLine.indexOf(change) : outLine.indexOf("A");
+        int bPos = !outLine.contains("B") ? outLine.indexOf(change) : outLine.indexOf("B");
+        int sPos = !outLine.contains("S") ? outLine.indexOf(change) : outLine.indexOf("S");
+        if (!right) {
             posOfNotTerminal = outLine.indexOf(change);
-        else
+            if (!(posOfNotTerminal <= aPos && posOfNotTerminal <= bPos && posOfNotTerminal <= sPos))
+                throw new RuntimeException("Cant decide this word");
+
+        } else {
             posOfNotTerminal = outLine.lastIndexOf(change);
+            if (!(posOfNotTerminal >= aPos && posOfNotTerminal >= bPos && posOfNotTerminal >= sPos))
+                throw new RuntimeException("Cant decide this word");
+        }
         changeTerminal(posOfNotTerminal, changeTo);
         S = outLine.indexOf('S') != -1;
         A = outLine.indexOf('A') != -1;
@@ -51,6 +59,7 @@ public class Main {
         tree.getNeededNode(change.toCharArray()[0], right);
         tree.addChilds(changeTo.toCharArray());
     }
+
     public static void change(boolean right) {
         Scanner scn = new Scanner(System.in);
         int numberOfRule;
@@ -59,35 +68,35 @@ public class Main {
             numberOfRule = scn.nextInt();
             switch (numberOfRule) {
                 case 1 -> {
-                    changeInner("S", "aSbS",right);
+                    changeInner("S", "aSbS", right);
                     wayToTerminalChain.append("1 ");
                 }
                 case 2 -> {
-                    changeInner("S", "aS",right);
+                    changeInner("S", "aS", right);
                     wayToTerminalChain.append("2 ");
                 }
                 case 3 -> {
-                    changeInner("S", "A",right);
+                    changeInner("S", "A", right);
                     wayToTerminalChain.append("3 ");
                 }
                 case 4 -> {
-                    changeInner("A", "Sa",right);
+                    changeInner("A", "Sa", right);
                     wayToTerminalChain.append("4 ");
                 }
                 case 5 -> {
-                    changeInner("A", "Ba",right);
+                    changeInner("A", "Ba", right);
                     wayToTerminalChain.append("5 ");
                 }
                 case 6 -> {
-                    changeInner("A", "b",right);
+                    changeInner("A", "b", right);
                     wayToTerminalChain.append("6 ");
                 }
                 case 7 -> {
-                    changeInner("B", "b",right);
+                    changeInner("B", "b", right);
                     wayToTerminalChain.append("7 ");
                 }
                 case 8 -> {
-                    changeInner("B", "aA",right);
+                    changeInner("B", "aA", right);
                     wayToTerminalChain.append("8 ");
                 }
                 default -> System.out.println("Incorrect! Try again!");
